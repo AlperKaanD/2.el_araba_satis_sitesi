@@ -1,0 +1,156 @@
+﻿@model IEnumerable<alperkaand_proje.Models.ilan_goster>
+
+@{
+    ViewBag.Title = "ilanlarim_list";
+    Layout = "~/Views/Shared/_uyelerLayout.cshtml";
+}
+
+<h2>ilanlarim</h2>
+
+<p>
+    @Html.ActionLink("Yeni İlan", "yeni_ilan", new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            İlan Tarihi
+        </th>
+        <th>
+            FotoURL
+        </th>
+        <th>
+            Fiyat
+        </th>
+        <th>
+            Km
+        </th>
+        <th>
+            Açıklama
+        </th>
+        <th>
+            Takas
+        </th>
+        <th>
+            İlan Baslığı
+        </th>
+        <th>
+            Taşıt Türü
+        </th>
+        <th>
+            Üretim Yılı
+        </th>
+        <th>
+            Şehir
+        </th>
+        <th>
+            İlçe Adı
+        </th>
+        <th>
+            Kasa Tipi
+        </th>
+        <th>
+            Marka
+        </th>
+        <th>
+            Model
+        </th>
+        <th>
+            Motor Gücü
+        </th>
+        <th>
+            Motor Hacmi
+        </th>
+        <th>
+            Renk
+        </th>
+
+        <th>
+            Kullanıcı Adı
+        </th>
+        <th>
+            Varyant
+        </th>
+        <th>
+            Vites Tipi
+        </th>
+        <th>
+            Yakıt
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ilan_tarihi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FotoURL)
+        </td>
+        <td style="color:red;">
+            @item.fiyat.ToString("N0")
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.km)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.acıklama)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.takas)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ilan_basligi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tasit_turleri.tas_tur_adi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.uretim_yili.yillar)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sehirler.sehir_adi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ilceler.ilce_adi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.kasa_tipleri.kasa_tipi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tasit_markalari.tas_marka_adi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tasit_modelleri.tas_model_ad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.motor_gucleri.motor_gucu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.motor_hacimleri.motor_hacmi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.renkler.renk)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.uyeler.kuladi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.varyantlar.varyant_ad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.vites_tipi.vites_tip)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.yakit_tipleri.yakit_tip)
+        </td>
+        <td>
+            @Html.ActionLink("İlanı Güncelle ", "ilanlarim_edit", new { id = item.ilan_no }, new { @class = "btn btn-success" }) |
+
+            @Html.ActionLink("İlanı Sil", "Delete", new { id = item.ilan_no }, new { @class = "btn btn-danger" })
+        </td>
+    </tr>
+}
+
+</table>

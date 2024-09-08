@@ -1,0 +1,110 @@
+﻿@model IEnumerable<alperkaand_proje.Models.uyeler>
+
+@{
+    ViewBag.Title = "uyeler_list";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+<h2>Tüm Üyeler</h2>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table id="tablom" class="table">
+    <thead>
+        <tr>
+            <th>
+                Üye No
+            </th>
+            <th>
+                Kullanıcı Adı
+            </th>
+            <th>
+                Şifre
+            </th>
+            <th>
+                Üye TC Kimlik No
+            </th>
+            <th>
+                Ad Soyad
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Telefon
+            </th>
+            <th>
+                Kayit Tarihi
+            </th>
+            <th>
+                Üye Foto
+            </th>
+            <th>
+                İlçe
+            </th>
+            <th>
+                Şehir
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.uyeno)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.kuladi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sifre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.uye_TC)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.adsoyad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefon)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.KayitTarihi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.uye_foto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ilceler.ilce_adi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sehirler.sehir_adi)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.uyeno }) |
+
+                    @Html.ActionLink("Delete", "Delete", new { id = item.uyeno })
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#tablom').DataTable({
+                language: {
+                    url: "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Turkish.json"
+                }
+            });
+
+        });
+    </script>
+}

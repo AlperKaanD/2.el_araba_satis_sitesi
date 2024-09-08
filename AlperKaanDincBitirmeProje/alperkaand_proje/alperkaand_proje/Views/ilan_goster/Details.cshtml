@@ -1,0 +1,110 @@
+﻿@model alperkaand_proje.Models.ilan_goster
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<style>
+    li {
+        margin-left: -31px;
+    }
+
+</style>
+
+<h4 style="text-align:center;">İlan Detayı</h4>
+<hr />
+<dll class="dl-horizontal">
+
+    <div class="breadcrumb-option set-bg" data-setbg="~/images/breadcrumb-bg.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>@Html.DisplayFor(model => model.ilan_basligi)</h2>
+                        <div class="breadcrumb__links">
+                            <a href="./index.html"><i class="fa fa-home"></i> Anasayfa</a>
+                            <span>@Html.DisplayFor(model => model.tasit_markalari.tas_marka_adi)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Car Details Section Begin -->
+    <section class="car-details spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="car__details__pic">
+                        <div class="car__details__pic__large">
+                            <img class="car-big-img" style="width:400px; " src="~/images/@Html.DisplayFor(model => model.FotoURL)" alt="">
+
+                        </div>
+                    </div>
+                    <div class="car__details__tab">
+                        <ul class="nav nav-tabs" role="tablist">
+
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tabs-1" role="tab">AÇIKLAMA</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">TEKNİK DETAYLAR</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                                <div class="car__details__tab__info">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="car__details__tab__info__item">
+                                               <ul><li> @Html.DisplayFor(model => model.acıklama)</li></ul>
+                                              
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="car__details__sidebar">
+                        <div class="car__details__sidebar__model">
+                            <p>    @Html.DisplayFor(model => model.uyeler.adsoyad)</p>
+                            <p> @Html.DisplayFor(model => model.ilceler.ilce_adi)/ @Html.DisplayFor(model => model.sehirler.sehir_adi)</p>
+                            <p>İlan Tarihi: <span> @Html.DisplayFor(model => model.ilan_tarihi)</span> </p>
+                            <p>İlan No: <span style="color:red">@Html.DisplayFor(model => model.ilan_no)</span></p>
+                        </div>
+                        <div class="car__details__sidebar__payment">
+                            <ul>
+
+                                <li>Fiyatı <span style="color:red"> @Html.DisplayFor(model=>model.fiyat)<span>TL</span></span></li>
+                                <li>Marka <span>     @Html.DisplayFor(model => model.tasit_markalari.tas_marka_adi)</span></li>
+                                <li>Model <span>     @Html.DisplayFor(model => model.tasit_modelleri.tas_model_ad)</span></li>
+                                <li>Varyant <span>    @Html.DisplayFor(model => model.varyantlar.varyant_ad)</span></li>
+                                <li>Yıl <span>     @Html.DisplayFor(model => model.uretim_yili.yillar)</span></li>
+                                <li>Yakıt <span>    @Html.DisplayFor(model => model.yakit_tipleri.yakit_tip)</span></li>
+                                <li>Vites <span>    @Html.DisplayFor(model => model.vites_tipi.vites_tip)</span></li>
+                                <li>Km <span>    @Html.DisplayFor(model => model.km)</span></li>
+                                <li>Kasa Tipi <span> @Html.DisplayFor(model => model.kasa_tipleri.kasa_tipi)</span></li>
+                                <li>Motor Gücü <span>  @Html.DisplayFor(model => model.motor_gucleri.motor_gucu)</span></li>
+                                <li>Motor Hacmi <span> @Html.DisplayFor(model => model.motor_hacimleri.motor_hacmi) </span></li>
+                                <li>Renk <span>      @Html.DisplayFor(model => model.renkler.renk)</span></li>
+                                <li>Takas <span>      @Html.DisplayFor(model => model.takas)</span></li>
+
+                            </ul>
+
+                            <p class="btn-info" style="text-align:center">ARA<br /> @Html.DisplayFor(model => model.uyeler.Telefon)</p>
+                            <a href="#" class="primary-btn sidebar-btn"><i class="fa fa-sliders"></i> Mesaj Gonder</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+

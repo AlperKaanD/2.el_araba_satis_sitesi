@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="dd44851592f34118af8fab92e4418dcf" Name="Diagram1">
+        <EntityTypeShape EntityType="deneme2_projeModel.admin" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="deneme2_projeModel.ilan_goster" Width="1.5" PointX="7.5" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="deneme2_projeModel.ilceler" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="deneme2_projeModel.kasa_tipleri" Width="1.5" PointX="5.25" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="deneme2_projeModel.motor_gucleri" Width="1.5" PointX="5.25" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="deneme2_projeModel.motor_hacimleri" Width="1.5" PointX="5.25" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="deneme2_projeModel.renkler" Width="1.5" PointX="5.25" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="deneme2_projeModel.sehirler" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="deneme2_projeModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="deneme2_projeModel.tasit_markalari" Width="1.5" PointX="5.25" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="deneme2_projeModel.tasit_modelleri" Width="1.5" PointX="5.25" PointY="23.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="deneme2_projeModel.tasit_turleri" Width="1.5" PointX="5.25" PointY="26.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="deneme2_projeModel.uretim_yili" Width="1.5" PointX="5.25" PointY="28.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="deneme2_projeModel.uyeler" Width="1.5" PointX="5.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="deneme2_projeModel.varyantlar" Width="1.5" PointX="5.25" PointY="31.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="deneme2_projeModel.vites_tipi" Width="1.5" PointX="5.25" PointY="34.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="deneme2_projeModel.yakit_tipleri" Width="1.5" PointX="5.25" PointY="36.625" IsExpanded="true" />
+        <AssociationConnector Association="deneme2_projeModel.FK_ilan_goster_tasit_turleri" ManuallyRouted="false" />
+        <AssociationConnector Association="deneme2_projeModel.FK_ilan_goster_uretim_yili" ManuallyRouted="false" />
+        <AssociationConnector Association="deneme2_projeModel.fk_ilce_ilan" ManuallyRouted="false" />
+        <AssociationConnector Association="deneme2_projeModel.fk_kasatip_ilan" ManuallyRouted="false" />
+        <AssociationConnector Association="deneme2_projeModel.fk_markalar_ilan" ManuallyRouted="false" />
+        <AssociationConnector Association="deneme2_projeModel.fk_modeller_ilan" ManuallyRouted="false" />
+        <AssociationConnector Association="deneme2_projeModel.fk_motorgucu_ilan" ManuallyRouted="false" />
+        <AssociationConnector Association="deneme2_projeModel.fk_motorhacmi_ilan" ManuallyRouted="false" />
+        <AssociationConnector Association="deneme2_projeModel.fk_renk_ilan" ManuallyRouted="false" />
+        <AssociationConnector Association="deneme2_projeModel.fk_sehir_ilan" ManuallyRouted="false" />
+        <AssociationConnector Association="deneme2_projeModel.fk_uyeler_ilan" ManuallyRouted="false" />
+        <AssociationConnector Association="deneme2_projeModel.fk_varyant_ilan" ManuallyRouted="false" />
+        <AssociationConnector Association="deneme2_projeModel.fk_vites_ilan" ManuallyRouted="false" />
+        <AssociationConnector Association="deneme2_projeModel.fk_yakit_ilan" ManuallyRouted="false" />
+        <AssociationConnector Association="deneme2_projeModel.fk_ilceler_uyeler" ManuallyRouted="false" />
+        <AssociationConnector Association="deneme2_projeModel.fk_sehir_ilce" ManuallyRouted="false" />
+        <AssociationConnector Association="deneme2_projeModel.fk_sehirler_uyeler" ManuallyRouted="false" />
+        <AssociationConnector Association="deneme2_projeModel.fk_tasit_marka_tasit_model" ManuallyRouted="false" />
+        <AssociationConnector Association="deneme2_projeModel.fk_uretim_yil_tasit_marka" ManuallyRouted="false" />
+        <AssociationConnector Association="deneme2_projeModel.fk_tasit_model_varyant" ManuallyRouted="false" />
+        <AssociationConnector Association="deneme2_projeModel.FK_uretim_yili_tasit_turleri" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

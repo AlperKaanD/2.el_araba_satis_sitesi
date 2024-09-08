@@ -1,0 +1,14 @@
+﻿
+
+@model IEnumerable<alperkaand_proje.Models.tasit_turleri>
+
+<ul>
+    @foreach (var geln_kat in Model)
+    {
+        <li style=" list-style-type: none">
+            <a href="@Url.Action("Index", "ilan_goster", new { id = geln_kat.tas_tur_no })">
+                @geln_kat.tas_tur_adi
+            </a>
+        </li>
+    }
+</ul>

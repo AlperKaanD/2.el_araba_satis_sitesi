@@ -1,0 +1,81 @@
+﻿@model IEnumerable<alperkaand_proje.Models.uyeler>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.kuladi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sifre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.uye_TC)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.adsoyad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Telefon)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KayitTarihi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ilceler.ilce_adi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sehirler.sehir_adi)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.kuladi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sifre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.uye_TC)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.adsoyad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Telefon)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KayitTarihi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ilceler.ilce_adi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sehirler.sehir_adi)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.uyeno }) |
+            @Html.ActionLink("Details", "Details", new { id=item.uyeno }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.uyeno })
+        </td>
+    </tr>
+}
+
+</table>

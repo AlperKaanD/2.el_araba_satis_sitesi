@@ -1,0 +1,313 @@
+﻿
+@model alperkaand_proje.Models.ilan_goster
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+    $(function () {
+        $('#plaka_id').change(function () {
+            var id = $('#plaka_id').val();
+            $.ajax({
+                url: '/ilan_goster/ilcegetir',
+                data: { p: id },
+                type: "POST",
+                dataType: "Json",
+                success: function (data) {
+                    console.log(data);
+                    $('#ilce_id').empty();
+                    for (var i = 0; i < data.length; i++) {
+                        $('#ilce_id').append("<option value='" + data[i].Value + "'>" + data[i].Text + "</Option>");
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    $(function () {
+        $('#tas_tur_id').change(function () {
+            var id = $('#tas_tur_id').val();
+            $.ajax({
+                url: '/ilan_goster/yilgetir',
+                data: { y: id },
+                type: "POST",
+                dataType: "Json",
+                success: function (data) {
+                    console.log(data);
+                    $('#uretim_yil_id').empty();
+                    for (var i = 0; i < data.length; i++) {
+                        $('#uretim_yil_id').append("<option value='" + data[i].Value + "'>" + data[i].Text + "</Option>");
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    $(function () {
+        $('#uretim_yil_id').change(function () {
+            var id = $('#uretim_yil_id').val();
+            $.ajax({
+                url: '/ilan_goster/markagetir',
+                data: { m: id },
+                type: "POST",
+                dataType: "Json",
+                success: function (data) {
+                    console.log(data);
+                    $('#tas_marka_id').empty();
+                    for (var i = 0; i < data.length; i++) {
+                        $('#tas_marka_id').append("<option value='" + data[i].Value + "'>" + data[i].Text + "</Option>");
+                    }
+                }
+            });
+        });
+    });
+</script>
+<script>
+    $(function () {
+        $('#tas_marka_id').change(function () {
+            var id = $('#tas_marka_id').val();
+            $.ajax({
+                url: '/ilan_goster/modelgetir',
+                data: { n: id },
+                type: "POST",
+                dataType: "Json",
+                success: function (data) {
+                    console.log(data);
+                    $('#tas_model_id').empty();
+                    for (var i = 0; i < data.length; i++) {
+                        $('#tas_model_id').append("<option value='" + data[i].Value + "'>" + data[i].Text + "</Option>");
+                    }
+                }
+            });
+        });
+    });
+</script>
+<script>
+    $(function () {
+        $('#tas_model_id').change(function () {
+            var id = $('#tas_model_id').val();
+            $.ajax({
+                url: '/ilan_goster/varyantgetir',
+                data: { v: id },
+                type: "POST",
+                dataType: "Json",
+                success: function (data) {
+                    console.log(data);
+                    $('#varyant_id').empty();
+                    for (var i = 0; i < data.length; i++) {
+                        $('#varyant_id').append("<option value='" + data[i].Value + "'>" + data[i].Text + "</Option>");
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+
+@{
+    ViewBag.Title = "İlanı Düzenle";
+    Layout = "~/Views/Shared/_uyelerLayout.cshtml";
+}
+
+<b>@ViewBag.durum</b>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4 style="text-align:center">İlan Oluştur</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.ilan_no)
+
+
+    <div class="form-group">
+        @Html.Label("ILAN BAŞLIĞI", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ilan_basligi, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ilan_basligi, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        Fotoğraf Ekleyin (.png, .jpeg uzantılı dosyalar):
+        <div class="col-md-10">
+            @Html.TextBox("file", "", new { type = "file", multiple = true })
+            <div id="resim_goster" style="width:350px;height:150px"></div>
+            @Html.ValidationMessageFor(model => model.FotoURL, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.uyeid)
+
+
+    <!-- ŞEHİR ADI -->
+    <div class="form-group">
+        @Html.Label("ŞEHİR ADI", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("plaka_id", ViewBag.PlakaList as SelectList, "Şehir Seçiniz", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.plaka_id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <!-- İLÇE ADI -->
+    <div class="form-group">
+        @Html.Label("İLÇE ADI", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("ilce_id", ViewBag.Ilce_List as SelectList, "İlçe Seçiniz", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ilce_id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <!-- TAŞIT TÜRÜ -->
+    <div class="form-group">
+        @Html.Label("TAŞIT TÜRÜ", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("tas_tur_id", ViewBag.TasTurList as SelectList, "Araç Türü Seçiniz", htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.tas_tur_id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <!-- ÜRETİM YILI -->
+    <div class="form-group">
+        @Html.Label("ÜRETİM YILI", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("uretim_yil_id", ViewBag.UretimYilList as SelectList, "Üretim Yılı Seçiniz", htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.uretim_yil_id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <!-- MARKA -->
+    <div class="form-group">
+        @Html.Label("MARKA", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("tas_marka_id", ViewBag.TasMarkList as SelectList, "Marka Seçiniz", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.tas_marka_id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <!-- MODEL -->
+    <div class="form-group">
+        @Html.Label("MODEL", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("tas_model_id", ViewBag.TasModList as SelectList, "Model Seçiniz", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.tas_model_id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <!-- VARYANT -->
+    <div class="form-group">
+        @Html.Label("VARYANT", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("varyant_id", ViewBag.VaryantList as SelectList, "Varyant Seçiniz", htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.varyant_id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <!-- KM -->
+    <div class="form-group">
+        @Html.Label("KM", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.km, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.km, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <!-- VİTES TÜRÜ -->
+    <div class="form-group">
+        @Html.Label("VİTES TÜRÜ", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("vites_tip_id", ViewBag.VitesList as SelectList, "Vites Tipi Seçiniz", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.vites_tip_id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <!-- YAKIT TİP -->
+    <div class="form-group">
+        @Html.Label("YAKIT TİPİ", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("yakit_tipi_id", ViewBag.YakitList as SelectList, "Yakıt Tipi Seçiniz", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.yakit_tipi_id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <!-- FİYAT -->
+    <div class="form-group">
+        @Html.Label("FİYAT", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.fiyat, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.fiyat, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <!-- MOTOR GÜCÜ -->
+    <div class="form-group">
+        @Html.Label("MOTOR GÜCÜ (HP)", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("motor_gucu_id", ViewBag.MotorGucuList as SelectList, "Motor Gücü Seçiniz", htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.motor_gucu_id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <!-- MOTOR HACMİ -->
+    <div class="form-group">
+        @Html.Label("MOTOR HACMİ", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("motor_hacmi_id", ViewBag.MotorHacmiList as SelectList, "Motor Hacmi Seçiniz", htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.motor_hacmi_id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <!-- KASA TİPİ -->
+    <div class="form-group">
+        @Html.Label("KASA TİPİ", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("kasa_tip_id", ViewBag.KasaTipList as SelectList, "Kasa Tipi Seçiniz", htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.kasa_tip_id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <!-- RENK -->
+    <div class="form-group">
+        @Html.Label("RENK", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("renk_id", ViewBag.RenkList as SelectList, "Renk Seçiniz", htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.renk_id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <!-- AÇIKLAMA -->
+    <div class="form-group">
+        @Html.Label("AÇIKLAMA", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.acıklama, 6, 20, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.acıklama, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <!-- TAKAS -->
+    <div class="form-group">
+        @Html.Label("TAKAS", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                VAR: @Html.RadioButtonFor(model => model.takas, true)
+                YOK: @Html.RadioButtonFor(model => model.takas, false)
+                @Html.ValidationMessageFor(model => model.takas, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <!-- SUBMIT BUTTON -->
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="submit" class="btn btn-primary">Güncelle</button>
+        </div>
+    </div>
+</div>
+    @Html.ActionLink("İptal", "ilanlarim_list", new { @class = "btn btn-secondary" })
+}
+
+
+

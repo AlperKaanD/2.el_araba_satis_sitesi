@@ -1,0 +1,182 @@
+﻿@model IEnumerable<alperkaand_proje.Models.ilan_goster>
+
+@{
+    ViewBag.Title = "ilan_list";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+<h2>Tüm İlanlar</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table id="ilantablo" class="table">
+    <thead>
+        <tr>
+            <th>
+                Ilan No
+            </th>
+            <th>
+                Ilan Tarihi
+            </th>
+            <th>
+                Kullanıcı Adı
+            </th>
+            <th>
+                FotoURL
+            </th>
+            <th>
+                Fiyat
+            </th>
+            <th>
+                Km
+            </th>
+            <th>
+                Açıklama
+            </th>
+            <th>
+                Takas
+            </th>
+            <th>
+                İlan Baslığı
+            </th>
+            <th>
+                Taşıt Tür Adı
+            </th>
+            <th>
+                Üretim Yılı
+            </th>
+            <th>
+                İlçe Adı
+            </th>
+            <th>
+                Şehir Adı
+            </th>
+            <th>
+                Kasa Tipi
+            </th>
+            <th>
+                Marka
+            </th>
+            <th>
+                Model
+            </th>
+            <th>
+                Motor Gücü
+            </th>
+            <th>
+                Motor Hacmi
+            </th>
+            <th>
+                Renk
+            </th>
+
+            <th>
+                Varyant
+            </th>
+            <th>
+                Vıtes Tipi
+            </th>
+            <th>
+                Yakıt Tipi
+            </th> 
+            <th>
+                Edit/Sil
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ilan_no)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ilan_tarihi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.uyeler.kuladi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FotoURL)
+                </td>
+                <td>
+                    @item.fiyat.ToString("N0")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.km)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.acıklama)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.takas)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ilan_basligi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tasit_turleri.tas_tur_adi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.uretim_yili.yillar)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ilceler.ilce_adi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sehirler.sehir_adi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.kasa_tipleri.kasa_tipi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tasit_markalari.tas_marka_adi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tasit_modelleri.tas_model_ad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.motor_gucleri.motor_gucu)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.motor_hacimleri.motor_hacmi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.renkler.renk)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.varyantlar.varyant_ad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.vites_tipi.vites_tip)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.yakit_tipleri.yakit_tip)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ilan_no }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ilan_no })
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#ilantablo').DataTable({
+                language: {
+                    url: "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Turkish.json"
+
+                }
+            });
+
+        });
+    </script>
+}

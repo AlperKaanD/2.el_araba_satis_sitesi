@@ -1,0 +1,86 @@
+﻿@model IEnumerable<alperkaand_proje.Models.uyeler>
+
+@{
+    ViewBag.Title = "uyemlik";
+    Layout = "~/Views/Shared/_uyelerLayout.cshtml";
+}
+
+<h2>Profilin</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+           Kullanıcı Adı
+        </th>
+        <th>
+            Şifre
+        </th>
+        <th>
+            TC Kimlik No
+        </th>
+        <th>
+            Ad Soyad
+        </th>
+        <th>
+            E-Mail
+        </th>
+        <th>
+            Telefon
+        </th>
+        <th>
+            KayitTarihi
+        </th>
+        <th>
+            Üye Fotoğraf
+        </th>
+        <th>
+            İlçe
+        </th>
+        <th>
+            Şehir
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.kuladi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sifre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.uye_TC)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.adsoyad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Telefon)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KayitTarihi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.uye_foto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ilceler.ilce_adi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sehirler.sehir_adi)
+        </td>
+        <td>
+            @Html.ActionLink("Güncelle", "uyem_edit", new { id = item.uyeno }, new { @class="btn btn-success" })
+            
+            @Html.ActionLink("ÜYELİK SİL", "Delete", new { id=item.uyeno },new {@class="btn btn-danger"})
+        </td>
+    </tr>
+}
+
+</table>

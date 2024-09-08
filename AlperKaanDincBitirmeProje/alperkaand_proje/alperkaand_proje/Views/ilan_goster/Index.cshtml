@@ -1,0 +1,172 @@
+﻿@model IEnumerable<alperkaand_proje.Models.ilan_goster>
+
+@{
+    ViewBag.Title = "ilan_list";
+    Layout = "~/Views/Shared/_indexLayout.cshtml";
+}
+<style>
+    table img {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+    }
+
+    
+   
+
+</style>
+
+
+<section class="car spad">
+    <div class="row">
+        <div class="col-lg-2">
+            <div class="car__sidebar">
+
+
+                @using (Ajax.BeginForm("FiyatFiltrele", "ilan_goster",
+                    new AjaxOptions
+                    {
+                        UpdateTargetId = "filtrelenmisIlanlar", // Sonuçların güncelleneceği div ID'si
+                        InsertionMode = InsertionMode.Replace, // Eski sonuçların yerine yeni sonuçları ekle
+                        HttpMethod = "GET" // GET metodu kullan
+                    },
+                    new { id = "fiyatFiltreForm" })) // Formun ID'si
+                {
+                    <hr />
+                    <h5>Fiyat Aralığı</h5>
+                    <div class="form-group">
+                        <label for="minFiyat">Min Fiyat</label>
+                        <input type="number" id="minFiyat" name="minFiyat" class="form-control" placeholder="10000TL" />
+                    </div>
+                    <div class="form-group">
+                        <label for="maxFiyat">Max Fiyat</label>
+                        <input type="number" id="maxFiyat" name="maxFiyat" class="form-control" placeholder="100000000TL" />
+                    </div>
+                    <hr />
+                    <h5>Model Yılı</h5>
+                    <div class="form-group">
+                        <label for="minTarih">Min Model Yılı</label>
+                        <input type="datetime" id="minTarih" name="minTarih" class="form-control" placeholder="1996" />
+                    </div>
+                    <div class="form-group">
+                        <label for="maxTarih">Max Model Yılı</label>
+                        <input type="datetime" id="maxTarih" name="maxTarih" class="form-control" placeholder="2024" />
+                    </div>
+                    <hr />
+                    <h5>Kilometre</h5>
+                    <div class="form-group">
+                        <label for="minKM">Min KM </label>
+                        <input type="number" id="minKM" name="minKM" class="form-control" placeholder="0" />
+                    </div>
+                    <div class="form-group">
+                        <label for="maxKM">Max KM</label>
+                        <input type="number" id="maxKM" name="maxKM" class="form-control" placeholder="9999999" />
+                    </div>
+                    <hr />
+                    <h5>Adres</h5>
+                    <div class="form-group">
+                        <label for="sehirId">Şehir</label>
+                        @Html.DropDownList("plaka_id", new SelectList(ViewBag.Sehirler, "plaka", "sehir_adi"), "Şehir Seçin", new { @class = "form-control", @id = "plaka_id" })
+                    </div>
+                    <div class="form-group">
+                        <label for="ilceId">İlçe</label>
+                        @Html.DropDownList("ilce_id", new SelectList(ViewBag.Ilceler, "ilce_no", "ilce_adi"), "İlçe Seçin", new { @class = "form-control", @id = "ilce_id" })
+                    </div>
+                    <hr />
+                    <h5>Vites</h5>
+                    <div class="form-group">
+                        @Html.DropDownList("vites", new SelectList(ViewBag.vites, "vites_tip_no", "vites_tip"), "Vites Tipi Seçin", new { @class = "form-control", @id = "vites_id" })
+                    </div>
+                    <hr />
+                    <h5>Yakıt</h5>
+                    <div class="form-group">
+                        @Html.DropDownList("yakit", new SelectList(ViewBag.yakit, "yakit_tipi_no", "yakit_tip"), "Yakıt Tipi Seçin", new { @class = "form-control", @id = "yakit_id" })
+                    </div>
+                    <div class="form-group" >
+                        <label for="sonGun">İlan Tarihi</label>
+                        <select id="sonGun" name="sonGun" class="form-control">
+                            <option value="">Seçiniz</option>
+                            <option value="1">Son 1 Gün</option>
+                            <option value="2">Son 2 Gün</option>
+                            <option value="3">Son 3 Gün</option>
+                            <option value="7">Son 7 Gün</option>
+                            <option value="30">Son 30 Gün</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Filtrele</button>
+                    <button type="button" id="resetButton" class="btn btn-secondary">Filtreleri Sıfırla</button>
+
+                }
+            </div>
+        </div>
+
+
+        <div class="col-lg-10">
+            <div id="filtrelenmisIlanlar">
+                @* Buraya filtrelenmiş ilanlar gelecek *@
+                @Html.Partial("FiltrelenmisIlanlar", Model)
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script>
+        $(function () {
+            $('#plaka_id').change(function () {
+                var id = $('#plaka_id').val();
+                $.ajax({
+                    url: '/ilan_goster/ilcegetir',
+                    data: { p: id },
+                    type: "POST",
+                    dataType: "Json",
+                    success: function (data) {
+                        console.log(data);
+                        $('#ilce_id').empty();
+                        for (var i = 0; i < data.length; i++) {
+                            $('#ilce_id').append("<option value='" + data[i].Value + "'>" + data[i].Text + "</Option>");
+                        }
+                    }
+                });
+            });
+        });
+        $(document).ready(function () {
+            $('#ilantablo').DataTable({
+               
+                "paging": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "language": {
+                    "url":"//cdn.datatables.net/plug-ins/1.10.20/i18n/Turkish.json"
+                }
+            });
+        });
+
+        // AJAX ile filtreleme sonrası tabloyu yeniden başlat
+        function initializeDataTable() {
+            $('#ilantablo').DataTable({
+                "paging": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "language": {
+                    "url":"//cdn.datatables.net/plug-ins/1.10.20/i18n/Turkish.json"
+                }
+            });
+        }
+        $('#resetButton').click(function () {
+            // Tüm form alanlarını sıfırla
+            $('#fiyatFiltreForm')[0].reset();
+
+            // Eğer formu sıfırladıktan sonra otomatik olarak filtreleri sıfırlanmış şekilde göndermek isterseniz:
+            $('#fiyatFiltreForm').submit();
+        });
+    
+
+
+    </script>
+}

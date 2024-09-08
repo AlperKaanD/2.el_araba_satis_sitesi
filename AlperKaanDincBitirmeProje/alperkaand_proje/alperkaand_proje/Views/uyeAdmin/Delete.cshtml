@@ -1,0 +1,194 @@
+﻿@model alperkaand_proje.Models.ilan_goster
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_uyelerLayout.cshtml";
+}
+
+<h2>Sil?</h2>
+
+<h3>İlanı Silmek İstediğinize Emin misiniz:</h3>
+<div>
+    <h4>Ilanın</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            İlan Tarihi
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ilan_tarihi)
+        </dd>
+
+        <dt>
+            Fotoğraf
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FotoURL)
+        </dd>
+
+        <dt>
+            Fiyat
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fiyat)
+        </dd>
+
+        <dt>
+            Km
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.km)
+        </dd>
+
+        <dt>
+            Açıklama
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.acıklama)
+        </dd>
+
+        <dt>
+            Takas
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.takas)
+        </dd>
+
+        <dt>
+            İlan Başlığı
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ilan_basligi)
+        </dd>
+
+        <dt>
+            Taşıt Türü
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tasit_turleri.tas_tur_adi)
+        </dd>
+
+        <dt>
+            Üretim Yılı
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.uretim_yili.yillar)
+        </dd>
+        <dt>
+            Şehir
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sehirler.sehir_adi)
+        </dd>
+
+        <dt>
+            İlçe
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ilceler.ilce_adi)
+        </dd>
+
+        <dt>
+            Kasa Tipi
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.kasa_tipleri.kasa_tipi)
+        </dd>
+
+        <dt>
+            Marka
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tasit_markalari.tas_marka_adi)
+        </dd>
+
+        <dt>
+            Model
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tasit_modelleri.tas_model_ad)
+        </dd>
+
+        <dt>
+            Motor Gücü
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.motor_gucleri.motor_gucu)
+        </dd>
+
+        <dt>
+            Motor Hacmi
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.motor_hacimleri.motor_hacmi)
+        </dd>
+
+        <dt>
+            Renkler
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.renkler.renk)
+        </dd>
+
+
+
+        <dt>
+            Kullanıcı Adı
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.uyeler.kuladi)
+        </dd>
+
+        <dt>
+            Varyant
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.varyantlar.varyant_ad)
+        </dd>
+
+        <dt>
+           Vites Tipi
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.vites_tipi.vites_tip)
+        </dd>
+
+        <dt>
+           Yakıt Tipi
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.yakit_tipleri.yakit_tip)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Sil" class="btn btn-danger" /> |
+            @Html.ActionLink("Vazgeç", "ilanlarim_list")
+        </div>
+    }
+</div>
