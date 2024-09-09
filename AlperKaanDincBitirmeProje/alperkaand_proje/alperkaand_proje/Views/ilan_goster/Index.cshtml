@@ -162,6 +162,12 @@
             // Tüm form alanlarını sıfırla
             $('#fiyatFiltreForm')[0].reset();
 
+            $('#ilce_id').empty();
+            $('#ilce_id').append($('<option>', {
+                value: '',
+                text: 'İlçe Seçin'
+            }));
+
             // Eğer formu sıfırladıktan sonra otomatik olarak filtreleri sıfırlanmış şekilde göndermek isterseniz:
             $('#fiyatFiltreForm').submit();
         });
